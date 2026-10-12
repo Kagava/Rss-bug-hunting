@@ -52,6 +52,20 @@ function render() {
   list.innerHTML = "";
   for (let i = 0; i < visible.length; i++) {
     const task = visible[i];
+    switch (currentFilter) {
+      case "active":
+        if (task.done) {
+          continue;
+        }
+        break;
+      case "done":
+        if (!task.done) {
+          continue;
+        }
+        break;
+      default:
+        break;
+    }
     const li = document.createElement("li");
     li.className = "task";
     if (task.done) {
