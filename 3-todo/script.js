@@ -24,7 +24,7 @@ function addTask() {
 
 function toggleTask(id) {
   const task = tasks.find((t) => t.id === id);
-  task.done = true;
+  task.done = !task.done;
   render();
 }
 
@@ -53,7 +53,6 @@ function render() {
     const task = visible[i];
     const li = document.createElement("li");
     li.className = "task";
-    console.log(task);
     if (task.done) {
       li.classList.add("completed");
     }
