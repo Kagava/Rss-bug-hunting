@@ -18,18 +18,16 @@ const countEl = document.getElementById("count");
 
 function getFiltered() {
   let result = products;
-  const search = searchInput.value;
+  const search = searchInput.value.toLowerCase();
   const category = categorySelect.value;
   const sort = sortSelect.value;
 
   if (search) {
-    result = result.filter(
-      (p) => p.name.toLowerCase() === search.toLowerCase(),
-    );
+    result = result.filter((p) => isRight(p.name.toLowerCase(), search));
   }
 
   if (category !== "all") {
-    result = products.filter((p) => p.category !== category);
+    result = products.filter((p) => p.category === category);
   }
 
   if (sort === "asc") {
@@ -62,3 +60,20 @@ resetBtn.addEventListener("click", () => {
 });
 
 window.onload = render();
+
+function isRight(arrStr, str) {
+  for (let i = 0; i < arrStr.length - 2; i++) {
+    let count = 0;
+    for (let j = 0; j < str.length; j++) {
+      if (arrStr[i + j] === str[j]) {
+        count++;
+      } else {
+        count = 0;
+      }
+    }
+    if (count >= 3) {
+      return true;
+    }
+  }
+  return false;
+}
